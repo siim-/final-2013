@@ -16,7 +16,7 @@ def parse(expr):
         if (char not in ops) and (char not in pars):
             operand += char
         if char in ops:
-            if not(operand==''):
+            if not(operand == ''):
                 operands.push(node(operand))
             operand = ''
             if not operations.empty() and operations.peak() not in pars:
@@ -26,7 +26,8 @@ def parse(expr):
         if char in pars[0:3]:
             operations.push(char)
         if char in pars[3:len(pars)]:
-            operands.push(node(operand))
+            if not(operand == ''):
+                operands.push(node(operand))
             operand = ''
             while operations.peak() not in pars[0:3]:
                 operands.push(make_operand(operands.pop(),operands.pop(),operations))
