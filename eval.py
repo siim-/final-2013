@@ -1,5 +1,6 @@
 from util import node,inorder_traverse,stack,make_operand
 from parse import parse
+import graphics as g
 """
 Avaldise teisendamine AST'ks modifitseeritud Dijkstra Shunting-Yard algoritmi abil
 """
@@ -48,6 +49,7 @@ def execute(node):
         try:
             #Juhul kui tegemist pole operaatoriga siis on tegemist operandiga või muutujaga
             return int(node.data)
+        #Juhul kui eelpoolne int() tõstatab ValueErrori
         except ValueError:
             #Programm küsib kasutajalt puudu oleva muutuja
             return int(input("Muutuja {0}= ".format(node.data)))
@@ -60,13 +62,22 @@ def execute(node):
              '*' : a*b,
              '/' : a/b,
              '^' : a**b }[node.data]
-
+def draw_ast(window,root):
+    c = g.Circle(g.Point(window.getWidth()//2,12),10)
+    t = g.Text(g.Point(window.getWidth()//2,12),root.data)
+    c.draw(window)
+    t.draw(window)
 def main():
     print("Sisesta tehe:")
+    win = g.GraphWin("Avaldise puud",400,300)
+    draw_tree = True
     #Peamine lõpmatu kordus
     while(True):
         expression = input(">> ")
         root = parse(expression)
         print(execute(root))
+        if draw_tree:
+            draw_ast(win,root)
         del root
+    win.close()
 main()
