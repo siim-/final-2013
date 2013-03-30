@@ -1,5 +1,4 @@
 from util import node,inorder_traverse,stack,make_operand
-from parse import parse
 import graphics as g
 """
 Avaldise teisendamine AST'ks Dijkstra Shunting-Yard algoritmi abil
@@ -103,7 +102,7 @@ ON_SCREEN = stack()
 def main():
     graphics_switch = input("Graafilised puud? (Y/n): ")
     if(graphics_switch == "Y" or graphics_switch == "y"):
-        win = g.GraphWin("Avaldise puud",400,300)
+        win = g.GraphWin("Avaldise puu",400,300)
         draw_tree = True
     else:
         draw_tree = False
